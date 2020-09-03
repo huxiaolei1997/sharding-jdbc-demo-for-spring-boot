@@ -1,0 +1,35 @@
+server:
+  port: 8082
+sharding:
+  jdbc:
+    config:
+      props:
+        sql.show: true
+      sharding:
+        default-data-source-name: ds0
+      masterslave:
+        name: ms
+        master-data-source-name: ds0
+        slave-data-source-names: ds1
+    datasource:
+      ds0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://139.196.140.168:3306/ds0?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+        username: root
+        password: 123456
+        maxPoolSize: 50
+        minPoolSize: 10
+      ds1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://139.196.140.168:3306/ds1?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+        username: root
+        password: 123456
+        maxPoolSize: 50
+        minPoolSize: 10
+      names: ds0,ds1
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
